@@ -1,39 +1,12 @@
-# Messaging
+// inputData = {
+//     owner: 'Devon Cowell',
+//     numbers: '5033334444,788776,N/A',
+//     devoncowell: '15035033030',
+//     alexis: '7777777777',
+//     parentTypeIdentifier: '21'
+// }
 
-#### This application cleans a phone number and helps send a message from twilio through Copper CRM.
-
-#### By Theron Packus & Devon Cowell
-
-## Technologies Used
-
-* VS Code
-* HTML/CSS
-* JavaScript
-* jQuery
-* Bootstrap
-* Webpack
-* Jest
-* Babel
-* eslint
-* Node
-* popper.js
-
-## Description
-
-## Pre Setup Installation Requirements
-
-- Requires Visual Studio Code Installation
-- Requires Terminal Installation
-- Requires Google Chrome
-- Requires Node.js
-
-## Setup/Installation Requirements
-
-*
-
-## Current Zap Code 
-```
-function findOwnerNumber(messageData) {
+export function findOwnerNumber(messageData) {
     let keyArray = Object.keys(messageData);
     let valueArray = Object.values(messageData);
     let ownerNameReadyToCompare = (messageData.owner.toLowerCase()).split(" ").join("");
@@ -41,7 +14,7 @@ function findOwnerNumber(messageData) {
     return (valueArray.splice(ownerIndexValue, 1).toString());
 }
 
-function parentNameHandler(newParentId) {
+export function parentNameHandler(newParentId) {
 switch (newParentId) {
     case ('21'):
     return 'leads';
@@ -57,7 +30,7 @@ switch (newParentId) {
     };
 };
 
-function removeNonIntegers (dirtyNumberString) {
+export function removeNonIntegers (dirtyNumberString) {
     let cleanedCustomerPhone = "";
     for (let i = 0; i < dirtyNumberString.length; i++) {
         if (!isNaN(dirtyNumberString[i])) {
@@ -69,7 +42,7 @@ function removeNonIntegers (dirtyNumberString) {
     return lengthCheck(cleanedCustomerPhone);
 }
 
-function lengthCheck(number) {
+export function lengthCheck(number) {
     const error = "number entered is too long or the country code is incorrect";
     if (number.length < 10) {
         return "customer number is too short";
@@ -100,55 +73,18 @@ function lengthCheck(number) {
     }
 }
 
-function cleanNumbers(numbers){
+export function cleanNumbers(numbers){
     let numberArray = numbers.split(",");
     let selectedNumberString = numberArray[0];
     let spaceRemovedString = selectedNumberString.split(" ").join("");
     return removeNonIntegers(spaceRemovedString);
 };
 
-function newMessageHandler(newMessageData) {
-   output = {
+export function newMessageHandler(newMessageData) {
+    return {
         ownerName: newMessageData.owner,
         ownerNumber: findOwnerNumber(newMessageData),
         parentName: parentNameHandler(newMessageData.parentTypeIdentifier),
         customerNumber: cleanNumbers(newMessageData.numbers)
     };
-    return output;
 };
-
-newMessageHandler(inputData); 
-'''
-## Commit Aligned Performance Documentation
-
-* _runtime meta
-memory used mb
-57
-duration ms
-31_
-
-* _runtime meta
-memory used mb
-56
-duration ms
-20_
-
-* _runtime meta
-memory used mb
-56
-duration ms
-under 10_
-
-## Known Bugs
-
-## License
-
-[MIT](LICENSE.txt)
-
-Copyright © 2021 Theron Packus
-
-All rights Reserved
-
-## Support and Contact Information
-
-For contact support, please email me. My name's Theron Packus <a href = "mailto: tlpackus@gamil.com">Send Email</a>
